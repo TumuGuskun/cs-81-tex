@@ -1,0 +1,101 @@
+\documentclass[12pt,letterpaper,boxed,cm]{hmcpset}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{cases}
+\usepackage{enumitem}
+\usepackage{wasysym}
+
+\name{A GIRL HAS NO NAME}
+\class{Computer Science 81}
+\assignment{Homework 11}
+\duedate{4/18/17}
+
+\newcommand{\pn}[1]{\left( #1 \right)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\bk}[1]{\left[ #1 \right]}
+\newcommand{\set}[1]{\left\{#1\right\}}
+
+\begin{document}
+\problemlist{1, 2, 3, 4, 5, 6}
+
+\begin{problem}[1.]
+    [2 points] Consider the language 
+    \[
+        \mathbf{Reach} = \set{<M, x, s> | M~\text{eventually reaches control state $s$ when started on input $x$}}. 
+    \]
+    Is \textbf{Reach} recognizable, co-recognizable, both, or neither? Justify your answers.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[2.]
+    [6 points] Define a language to have ``prime nature'' iff every string in it has a prime number of symbols. In other words, the language is a subset of 
+    \[
+        \mathbf{Primes} = \set{1^p~|~p\text{ is prime}} = \set{11, 111, 11111, 1111111, \ldots}
+    \]
+    Any language containing a string not of prime length, such as the language $\set{111, 1111}$ does not have prime nature. Define language \textbf{PN} as follows:
+    \[
+        \textbf{PN} = \set{ <M> |~M\text{ is a Turing machine and $L(M)$ has prime nature} }
+    \]
+    Show that \textbf{PN} is undecidable. Note that whether \textbf{PN} itself has prime nature is not
+    at issue. (It is unlikely that it would.)
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[3.]
+    [2 points] In the previous problem, is \textbf{PN} recognizable? Is \textbf{PN} co-recognizable? Justify.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[4.]
+    [2 points] Show that if $L$ is a recognizable language, and $L \le_m L^c$ (i.e. $L$ is \emph{mapping reducible} to its own complement) then $L$ is decidable.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[5.]
+    [10 points] Show that 
+    \[
+        \textbf{Infinite}_{\text{TM}} = \set{<M> |~M \text{ is a Turing machine and $L(M)$ is infinite}}
+    \]
+    is neither recognizable nor co-recognizable. (This requires two separate proofs, using different techniques described in the lecture slides.)
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[6.]
+    [8 points] For each of the following questions for arbitrary Turing machine codes $<M>$, is the question rendered unrecognizable or un-corecongizable by Rice's theorem?  If so, state which (unrecognizable or un-corecongizable). If Rice's theorem doesn't apply, so state and indicate whether the question is decidable, giving the best justification that you can. You may use the Church-Turing thesis in describing decidable cases.
+    \begin{enumerate}[label=\alph*.]
+        \item $M$ accepts more than 81 different strings.
+        \item $M$ has no rejecting control states.
+        \item $M$ uses more than 81 steps on some input without halting.
+        \item $L(M)$ is decidable by some finite-state machine.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\end{document}

@@ -1,0 +1,148 @@
+\documentclass[12pt,letterpaper,boxed,cm]{hmcpset}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{cases}
+\usepackage{enumitem}
+\usepackage{wasysym}
+\usepackage{soul}
+
+\name{A GIRL HAS NO NAME}
+\class{Computer Science 81}
+\assignment{Homework 7}
+\duedate{3/7/17}
+
+\newcommand{\pn}[1]{\left( #1 \right)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\bk}[1]{\left[ #1 \right]}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ra}[0]{\rightarrow}
+\newcommand{\cp}[0]{~\vdash~}
+\newcommand{\turn}[0]{\,\vDash\,}
+\newcommand{\tf}[1]{\textbf{#1}}
+\newcommand{\mf}[1]{\mathbf{#1}}
+
+\begin{document}
+\problemlist{1, 2, 3, 4}
+
+\begin{problem}[1.]
+    [10 points] Resolution is really a proof technique best suited for computers. But just to make sure you understand how it works, we're asking you to do one resolution proof ``by hand.'' [Do not use Prover9 on this problem until you've succeeded!]\\\\
+    Consider the following argument
+    \begin{itemize}
+        \item Every fungus is a mushroom or a toadstool.                  
+        \item Every boletus is a fungus. \hspace{6cm} $[\forall x.\ (B(x)\ra F(x))]$
+        \item All toadstools are poisonous.
+        \item No boletus is a mushroom.
+        \item Specimen $b$ is a boletus.
+        \item \emph{Therefore}: Specimen $b$ is poisonous.
+    \end{itemize}
+    \begin{enumerate}[label=\Alph*.]
+        \item Convert this argument into a set of clauses that is \ul{unsatisfiable} if the argument is valid.
+        \item In a numbered list of clauses, show how to take these clauses and derive $\bot$.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[2.]
+    [5 points] Confirm that Prover9 can do the same proof. Specifically, convert your clauses into Prover9 ``assumption'' syntax (don’t use the goal window), and run Prover9. Then copy and paste the resulting proof (just the numbered lines) into your answer document.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[3.]
+    [9 points] The last page of this assignment contains Prover9 code to ``solve'' the famous Towers of Hanoi problem. (If you’re not familiar with this puzzle, we suggest you Google it.)\\\\
+    There are 5 disks (numbered 1 through 5, with disk 1 being smallest and disk 5 being biggest). The disks are on three pegs, with the requirement that a larger disk cannot be stacked on top of a smaller disk. So the state of the system at any moment can be described with three (sorted) lists that say which peg contains which disks. Of course, every disk must appear on some pole. So possible states include
+    \begin{align*}
+        &\textbf{state}\mathbf{([1,2,3,4,5], [~], [~])}   &&\% \text{ starting state, where all disks are on the first peg.}\\
+        &\textbf{state}\mathbf{([~], [~], [1,2,3,4,5])}   &&\% \text{ target state, with all disks on the last peg.}\\
+        &\textbf{state}\mathbf{([5], [4,2], [1,3])}       &&\% \text{ intermediate state, where every peg has some disks.}
+    \end{align*}
+    We can move one disk at a top, moving the top disk from one peg to another, always with the constraint that we cannot put a larger disk on top of a smaller disk. The formula \textbf{transition}$\mathbf{(x,y)}$ is defined to hold if one can get from state $\mf{x}$ to state $\mf{y}$ by moving a single disk.\\\\
+    Finally, the formula \textbf{reachable}$\mathbf{(x)}$ is defined to hold if one can get from the start state to state $\mf{x}$ by a sequence of transitions.\\\\
+    You should start by pasting the provided code (on the last page of this handout) into the ``assumptions'' window. Verify that Prover9 successfully complains--the assumption that one \textbf{cannot} reach the configuration where all disks are on the last peg is contradictory, and hence the target configuration \textbf{is} reachable.
+\end{problem}
+\newpage
+\begin{problem}[3. cont.]
+    But it doesn’t say why/how that configuration can be reached. Your job is to modify this code so that we can get the sequence of moves out of Prover9.
+    \begin{enumerate}[label=\Alph*.]
+        \item We can describe moves with a 2-digit number. Specifically $\mf{13}$ means ``move a disk from peg 1 to peg 3'', while $\mf{32}$ means ``move a disk from peg 3 to peg 2''.\\\\
+        Change the rules defining the transition relation to make it a three-argument predicate, so that \tf{transition}$\mf{(x,y,\tf{why})}$ if we can get from state $\mf{x}$ to state $\mf{y}$ in one move, and why is the corresponding number for that move.\\\\
+        Hint:  the first line will be \tf{transition(state}$\mf{([w:x],[~],z)}$,~~\tf{state}$\mf{(x,[w],z), 12)}.$
+        \item You can’t test the code yet, because you have defined transition to be a 3-argument relation, and the definition of reachable treats it as a 2-place relation. Let’s patch this by adding an extra dummy argument $\mf{why}$ to the definition of run:
+        \[
+            \tf{reachable}\mf{(y)} \leftarrow \tf{reachable}\mf{(x)}~\&~\tf{transition}\mf{(x,y,\tf{why})}.
+        \]
+        Verify that Prover9 still finds the puzzle solvable, but doesn’t explain how.
+        \item Finally, make reachable a 2-place relation, so that \tf{reachable}$\mf{(x,\tf{why})}$ is true if state $\mf{x}$ is reachable via \tf{why}, a list of move numbers in \emph{reverse} order. (You can follow the model of the peg puzzle in class).
+        \item Test your definition by changing the final assumption to
+        \[
+            \textbf{-reachable(state}\mf{([~],[~],[1,2,3,4,5])}, \tf{whys})~\#~\tf{answer(whys)}.
+        \]
+        Verify that Prover9 can discover a list \textbf{whys} of moves that reaches the target state. 
+        \item Paste your modified code and the resulting (reversed) list of moves into this document. 
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[4.]
+    [1 easy point] Answer this quick survey when you’re done:
+    \begin{enumerate}[label=\Alph*.]
+        \item How long (in hours) did you spend working on this assignment?
+        \item What was the most interesting thing you learned while answering these problems? 
+    \end{enumerate}
+   
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\end{document}
+
+\iffalse
+Towers of Hanoi starter code.
+% 5-disk Towers of Hanoi for Prover9
+
+% Any disk can move to an empty peg
+transition( state([w:x],[],z), state(x,[w],z) ).
+transition( state([w:x],y,[]), state(x,y,[w]) ).
+transition( state([],[w:y],z), state([w],y,z) ).
+transition( state(x,[w:y],[]), state(x,y,[w]) ).
+transition( state([],y,[w:z]), state([w],y,z) ).
+transition( state(x,[],[w:z]), state(x,[w],z) ).
+
+% A disk w can move to a nonempty peg
+%   if it is smaller than the top disk u on that peg
+transition( state([w:x],[u:y],z), state(x,[w,u:y],z) ) <- w<u.
+transition( state([w:x],y,[u:z]), state(x,y,[w,u:z]) ) <- w<u.
+transition( state([u:x],[w:y],z), state([w,u:x],y,z) ) <- w<u.
+transition( state(x,[w:y],[u:z]), state(x,y,[w,u:z]) ) <- w<u.
+transition( state([u:x],y,[w:z]), state([w,u:x],y,z) ) <- w<u.
+transition( state(x,[u:y],[w:z]), state(x,[w,u:y],z) ) <- w<u.
+
+% Useful facts about small numbers
+1<2. 1<3. 2<3. 1<4. 2<4. 3<4. 1<5. 2<5. 3<5. 4<5.
+
+% A state is reachable if it's the start state,
+% or if it is one step beyond a reachable state.
+reachable( state([1,2,3,4,5],[],[]) ).
+reachable(y) <- reachable(x) & transition(x,y).
+
+% Query: is the final state with all disks on the 3rd peg reachable?
+%   Let's assume not, and see if that would be consistent with the rules.
+-reachable( state([],[],[1,2,3,4,5]) ).
+\fi

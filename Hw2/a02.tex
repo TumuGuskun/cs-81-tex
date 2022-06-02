@@ -1,0 +1,108 @@
+\documentclass[12pt,letterpaper,boxed,cm]{hmcpset}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+
+
+\name{A GIRL HAS NO NAME}
+\class{Computer Science 81}
+\assignment{Homework 2}
+\duedate{1/31/17}
+
+\newcommand{\pn}[1]{\left( #1 \right)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\bk}[1]{\left[ #1 \right]}
+\newcommand{\ra}[0]{\rightarrow}
+\newcommand{\cp}[0]{~\vdash~}
+
+\begin{document}
+\problemlist{1, 2, 3, 4, 5}
+
+\begin{problem}[1]
+    [20 points] Give box-style proofs for each of the following:
+    \begin{enumerate}
+        \item [A.] [4 points] $F \ra G \cp \pn{\pn{F \land G} \ra F} \land \pn{F \ra \pn{F \land G}}.$
+        \item [B.] [4 points] $\pn{F \ra G} \land \pn{F \ra H} \cp F \ra \pn{G \land H}.$
+        \item [C.] [4 points] $F \lor G, ~\neg F \cp G.$
+        \item [D.] [4 points] $\neg\pn{F \ra G} \cp G \ra F.$
+        \item [E.] [4 points] $\neg\pn{F \land G} \cp \neg F \lor \neg G.$
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[2]
+    [6 points] Pierce's Law is the formula $\pn{\pn{F \ra G} \ra F} \ra F.$
+    \begin{enumerate}
+        \item [A.] [2 points] By using truth tables, show that Pierce's law is a tautology (i.e., that  $~\vDash \pn{\pn{F \ra G} \ra F} \ra F$), or equivalently that this formula is true under every valuation.
+        \item [B.] [4 points] Prove Pierce's Law using natural deduction.
+        \begin{itemize}
+            \item [] Hint: As mentioned in class, \textit{constructive} logic rejects the use of “indirect” arguments. Consequently, in constructive logic one cannot use the excluded middle axiom $\pn{\vdash~\phi\lor\neg\phi}$, double-negation elimination rule $\pn{\neg\neg\phi \cp\phi} $, or the proof by contradiction rule (if $\neg\phi\cp\bot$, then$\cp\phi$). In constructive logic, Pierce's Law is not provable!  Therefore, your proof has to involve at least one use of at least one of these three classical rules.
+        \end{itemize}
+    \end{enumerate}
+    
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[3]
+    [24 points] \textbf{Proof or No Proof?} For each of the following, either show there is no proof (by finding a valuation/model that makes the assumptions true and the conclusion false), or provide a natural deduction (box) proof.
+    \begin{enumerate}
+        \item [A.] [4 points] $\neg F\lor\pn{G\ra F}\cp\neg F\land G.$
+        \item [B.] [4 points] $F \ra G,~\neg F\ra G \cp G.$
+        \item [C.] [4 points] $F \ra G \ra H \cp G \ra F \ra H.$
+        \item [D.] [4 points] $F \ra G \ra H \cp F \ra H \ra G.$
+        \item [E.] [4 points] $\pn{F \ra G} \ra H \cp F \ra G \ra H.$
+        \item [F.] [4 points] $F \ra G,~C \ra D \cp F \lor C \ra G \land D.$
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[4]
+    [9 points] \textbf{OS Wars:} Consider the following argument:
+    \begin{itemize}
+        \item Premise 1: If my computer runs Windows, then Microsoft got my money.
+        \item Premise 2: If my computer runs Mac OS X, then Apple got my money.
+        \item Conclusion: At least one of the following statements is true:
+        \begin{itemize}
+            \item If my computer runs Mac OS X, then Microsoft got my money.
+            \item If my computer runs Windows, then Apple got my money.
+        \end{itemize}
+    \end{itemize}
+    \begin{enumerate}
+        \item [A.] Define propositions (e.g., $F$, $G$, etc.) to stand for relevant statements in this proof, and show how to symbolically represent the premises and conclusion using these propositions.
+        \item [B.] Either provide a formal proof that this argument holds, or find a valuation where the assumptions are true but the conclusion is false.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[5]
+    [1 easy point] Please wait until you're done with the rest of the assignment to answer this quick survey:
+    \begin{enumerate}
+        \item [A.] How long (in hours) did you spend working on this assignment?
+        \item [B.] What was the most interesting thing you learned while answering these problems? (We're sure there was \textit{something} you learned.)
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\end{document}

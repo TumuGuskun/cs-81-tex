@@ -1,0 +1,93 @@
+\documentclass[12pt,letterpaper,boxed,cm]{hmcpset}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{cases}
+\usepackage{enumitem}
+\usepackage{wasysym}
+
+\name{A GIRL HAS NO NAME}
+\class{Computer Science 81}
+\assignment{Homework 12}
+\duedate{4/25/17}
+
+\newcommand{\pn}[1]{\left( #1 \right)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\bk}[1]{\left[ #1 \right]}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\tb}[1]{\textbf{#1}}
+
+\begin{document}
+\noindent
+\tb{Notation:} If $x$ is a string and $\sigma$ is a symbol, then $\#_\sigma(x)$ is the number of times that $\sigma$ occurs in $x$. For example, $\#_1(01101) = 3$. Also $\abs{x}$ is the total number of symbols in $x$.
+
+\problemlist{1, 2, 3, 4}
+
+\begin{problem}[1.]
+    [3 points] Give a context-free grammar that generates the following language over terminal alphabet $\set{1, +, =}$:
+    \[
+            L = \set{1^m+1^n=1^{n+m}\,|\,m > 0 \land n > 0}
+    \]
+    The first few strings in $L$ are:
+    \begin{align*}
+        &1+1=11 \\
+        &1+11=111 \\
+        &11+1=111 \\
+        &11+11=1111 \\
+        &11+111=11111 \\
+        &111+11=11111 
+    \end{align*}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[2.]
+    [7 points] Consider the following context-free grammar $G$, with terminal alphabet $\set{0, 1}$ and start symbol $S$. The productions are:
+    \[
+        S\rightarrow \epsilon~|~0S1S~|~1S0S
+    \]
+    It is claimed that this grammar generates the language 
+    \[
+        L = \set{x \in \set{0, 1}*~|~\#_0(x) = \#_1(x)}.
+    \]
+    \begin{enumerate}[label=\alph*.]
+        \item {[2 points]} Prove that $L(G) \subseteq L$. For this part, it is natural to use mathematical induction on the number of steps in the derivation of a string from $S$.
+        \item {[5 points]} Prove that $L \in L(G)$. For this part, you would probably use strong mathematical induction on the length of strings in the language.\\\\
+        That is, given $x \in L$ to show $x \in L(G)$, make the inductive assumption that for every $y$ with $\abs{y} < \abs{x}, y \in L$ implies $y \in L(G)$. Consider breaking $x$ into smaller pieces on which the induction hypothesis can be used, then show how the pieces are put together using the productions.\\\\
+        As an example, consider a string such as $1100010011$. How would you break it down?
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[3.]
+    [6 points] Determine for each of the following grammars whether or not it generates an infinite language. In each case the start symbol is $S$ and the terminal alphabet is $\set{0, 1, 2}$. Explain your reasoning.
+    \begin{align*}
+        \text{a.}~&S\rightarrow A~|~B &A\rightarrow A0 && &B\rightarrow B1 &&& C\rightarrow S~|~C2~|~\epsilon\\\\
+        \text{b.}~&S\rightarrow A0 & A\rightarrow 1B && &B\rightarrow A0~|~2\\\\
+        \text{c.}~&S\rightarrow 0AB1~|~\epsilon & A\rightarrow B1 && &B\rightarrow A2
+    \end{align*}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[4.]
+    [Optional Extra Credit: 15 points] We know that it is undecidable whether the language of a Turing machine is infinite. For context-free grammars, however, this property \emph{is} decidable. Show this by giving an algorithm for deciding whether the language of a context-free grammar is infinite. Your write-up should be an algorithm in pseudocode, or better, an actual implementation.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+\end{document}

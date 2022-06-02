@@ -1,0 +1,144 @@
+\documentclass[12pt,letterpaper,boxed,cm]{hmcpset}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{cases}
+
+\name{A GIRL HAS NO NAME}
+\class{Computer Science 81}
+\assignment{Homework 3}
+\duedate{2/7/17}
+
+\newcommand{\pn}[1]{\left( #1 \right)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\bk}[1]{\left[ #1 \right]}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ra}[0]{\rightarrow}
+\newcommand{\cp}[0]{~\vdash~}
+
+\begin{document}
+\problemlist{1, 2, 3, 4, EC}
+
+\begin{problem}[1.]
+    [20 points] Give natural deduction proofs of the following, using constructive rules only.
+    \begin{enumerate}
+        \item [A.] [4 points] $\exists x.\,\pn{R(x) \ra B(x)}   \cp  (\forall x .R(x)) \ra \pn{\exists x.\,B(x)}$
+        \begin{flushright}
+            e.g., $R(x) =$ ``$x$ is realistic'', $B(x)=$ ``$x$ is believable''.   
+        \end{flushright}
+        \item [B.] [4 points] $(\forall x.\, G(x)) \lor (\forall x.\, B(x))  \cp  \forall x.\,  (G(x) \lor B(x))$
+        \begin{flushright}
+            e.g., $G(x) = ``x$ is good'', $B(x) =$ ``$x$ is bad''.   
+        \end{flushright}
+        \item [C.] [4 points] $\forall x.\, (H(j) \ra T(x)) \cp H(j) \ra (\forall x.\,T(x))$
+        \begin{flushright}
+            e.g., $j =$ ``I/me'', $H(x) = ``x$ is hungry'', $T(x) = ``x$ is tasty''.   
+        \end{flushright}
+        \item [D.] [4 points] \\ $\neg\exists x.\,(G(x)) \lor (\forall x.F(x)),  C(j) \ra\forall x.\, D(x)\cp  \forall y.\forall z. ( (\neg G(z) \lor F(y)) \land (C(j)\ra D(y)) )$
+        \begin{flushright}
+            e.g., $G(x) = ``x$ is a ghost'', $F(x) = ``x$ is fictional'',\\
+            $j  =$ ``I/me'', $C(x) = ``x$ is confident'', $D(x) = ``x$ is doable''.   
+        \end{flushright}
+        \item [E.] [4 points] \\ $\forall x.\,(\neg S(x,x)), \forall x.\forall y.\forall z.(S(x,y)\land S(y,z) \ra S(x,z))\cp  \forall x.\,\forall y. (S(x,y) \ra \neg S(y,x))$
+        \begin{flushright}
+            e.g., $S(a,b) =$ ``movie $a$ is a sequel to movie $b$''.
+        \end{flushright}
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[2.]
+    [16 points] Give natural deduction proofs of the following. (Use LEM or contradiction.)
+    \begin{enumerate}
+        \item [A.] [8 points] $\forall x.\, (C(x) \lor E(x))\cp(\forall x.\,C(x)) \lor (\exists x.\,E(x))$
+        \begin{flushright}
+            e.g., $C(x) = ``x$ is cheap'', $E(x) = ``x$ is expensive''.   
+        \end{flushright}
+        \item [B.] [8 points] $\exists x.\,\top  \cp  \exists x.\,(D(x) \ra \forall y.\,D(y))$
+        \begin{flushright}
+            \emph{The ``drinker’s paradox'': at any moment in any nonempty bar,\\
+                        there is a person such that \\
+                        if they are drinking beer, everyone is drinking beer.}
+        \end{flushright}
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[3.]
+    [8 points] It is typical mathematical practice to write so-called \textit{bounded quantifiers} such as ``$\forall x\in S.\,\Phi$'' or ``$\exists x\le n.\,\Phi$'', where we are quantifying not over \underline{all} individuals, but only a \underline{subset} (e.g., the members of $S$, or the individuals less-than-or-equal-to $n$, or just grutors). In class, we mentioned that we can express the same idea using Jape's unbounded $\forall$ and $\exists$ as follows:
+    \begin{align*}
+        \exists x\in S.\,P(x)&\text{ becomes }\exists x.\,( (x\in S) \land P(x) )\\
+        \exists x\le n.\,P(x)&\text{ becomes }\exists x.\,( (x\le n) \land P(x) )~~~~~~~\text{etc.}\\\\
+        \forall x\in S.\,P(x) &\text{ becomes }\forall x.\,( (x\in S) \ra P(x) )\\
+        \forall x\le n.\,P(x) &\text{ becomes }\forall x.\,( (x\le n) \ra P(x) )~~~~~~\text{etc.}\\
+    \end{align*}
+    We also emphasized the two quantifiers translate differently: bounded-$\exists$ becomes a conjunction, while bounded-$\forall$ becomes an implication. Your job for this problem is to confirm that the difference is necessary.
+    \begin{enumerate}
+        \item [A.] [4 points] Describe a model (where the set of individuals is the set $\mathbb{N}$ of natural numbers (nonnegative integers), and the relation $\le$ is interpreted as the usual less-than-or-equal-to relation on $\mathbb{N}$) that makes 
+        \[
+            \forall x\le n.\,f(x) \le m
+        \]
+        or equivalently
+        \[
+            \forall x.\,( x\le n \ra f(x)\le m )
+        \]
+        true, but that makes
+        \[
+            \forall x.\,( x\le n ~\land~ f(x) \le m )
+        \]
+        false. (You will need to complete the model by giving interpretations of the function $f$ and the constants $n$ and $m$).
+        \item [B.] [4 points] Describe a model (where the set of individuals is the set $\mathbb{N}$ of natural numbers (nonnegative integers), and the relation $\le$ is interpreted as the usual less-than-or-equal-to relation on $\mathbb{N}$) that makes 
+        \[
+            \exists x.\,( x\le n  \ra   f(x) \le m )
+        \]
+        true, but that makes
+        \[
+            \exists x\le n. \,f(x) \le m
+        \]
+        or equivalently
+        \[
+            \exists x.\,( x\le n  ~\land~  f(x)\le m )
+        \]
+        false.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[4.]
+    [1 easy point] Please wait until you’re done with the rest of the assignment to answer this quick survey:
+    \begin{enumerate}
+        \item [A.] How long (in hours) did you spend working on this assignment?
+        \item [B.] What was the most interesting thing you learned while answering these problems? (We’re sure there was \emph{something} you learned.)
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[Extra Credit.]
+    [2 measly points] The formula $\neg\neg F \ra F$ is a tautology according to the proof tables, but is not provable from the constructive rules; you need a ``classical'' rule like proof-by-contradiction or LEM (or for the shortest proof) $\neg\neg$-elimination!)\\
+
+    But even constructive logicians agree that $\neg\neg F \ra F$ ``isn’t false'', because\\$\cp \neg\neg(\neg\neg F \ra F)$ is provable with purely constructive rules. Provide such a proof.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+\end{document}

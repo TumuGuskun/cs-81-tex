@@ -1,0 +1,129 @@
+\documentclass[12pt,letterpaper,boxed,cm]{hmcpset}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{cases}
+\usepackage{enumitem}
+\usepackage{wasysym}
+\usepackage[usenames, dvipsnames]{color}
+
+\name{A GIRL HAS NO NAME}
+\class{Computer Science 81}
+\assignment{Homework 10}
+\duedate{4/11/17}
+
+\newcommand{\pn}[1]{\left( #1 \right)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\bk}[1]{\left[ #1 \right]}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{ForestGreen}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\ra}[0]{\rightarrow}
+\newcommand{\cp}[0]{~\vdash~}
+\newcommand{\turn}[0]{\,\vDash\,}
+
+\begin{document}
+\problemlist{1, 2, 3, 4, 5, 6, 7}
+
+\begin{problem}[1.]
+    [7 points] This concerns the PCP language as described in the lecture. Show that the candidate strings (strings that are well-formed pairs, but which might not have a solution) can be mapped to first-order predicate logic clauses in such a way that there is a solution iff the set of clauses is unsatisfiable.\\\\
+    Hint: Treat the symbols a and b as function symbols. Define a predicate that simulates the concatenation of strings.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[2.]
+    [3 points] Demonstrate your technique in the previous problem using Prover9, on the following three examples:
+    \begin{enumerate}[label=\alph*.]
+        \item (\red{a}, \red{ab})(\green{ba},\green{a})
+        \item (\red{ba},\red{baa})(\green{ab},\green{ba})(\blue{aa},\blue{a})
+        \item (\red{a},\red{ab})(\green{ba},\green{ab})(\blue{bb},\blue{ba})
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[3.]
+    [5 points] As we know, strings and natural numbers are equivalent, in that strings can be encoded as numbers and numbers as strings. There are multiple one-to-one correspondences\footnote{A one-to-one correspondence between two sets is a function that is both one-to-one and onto, that is, a function $f:A\ra B$ such that (a)  $\forall x\in A \forall y\in A (f(x)=f(y)\ra x = y)$ and (b) $\forall z\in A \exists x\in A f(x)=z$} between the set of natural numbers and the set of strings over any finite alphabet. For example, if the alphabet is $\{1\}$, then the number $n$ corresponds to $1^n$ (a string of $n$ 1's). In this sense, we can treat a language as a set of numbers. We can then speak of a set of numbers as being decidable, recognizable, etc. the same as we would a language.\\\\
+    Suppose that $f: N \ra N$ is a computable function that enumerates a language $L \subseteq N$. From the Enumeration Theorem, we know that $L$ is therefore recognizable. Suppose further that $f$ has the \textbf{monotone} property:
+    \[
+        \text{If } i < j \text{ then } f(i) < f(j).
+    \]
+    Prove that an infinite language is decidable iff it is enumerable by a monotone computable function. (Use the Church-Turing thesis in an informal proof.)
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[4.]
+    [5 points] Give an informal (but nonetheless convincing) algorithm for \textbf{deciding} the following language:
+    \begin{align*}
+        \{ <M> |~M &\text{ is a Turing machine that, when started on an all-blank}\\
+                  &\text{tape, eventually prints something other than a blank}\}
+    \end{align*}
+    As usual, $<M>$ means a string encoding the rules for M.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[5.]
+    [3 points] Show that if $L$ and $M$ are arbitrary recognizable languages, then $L \cup M$ is also recognizable. Use the Church-Turing thesis. (Before answering, review the distinction between recognizable and decidable.) In your proof, you must address the issue that neither $L$ nor $M$ necessarily halt on a given input, i.e. they don't have to have deciders.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[6.]
+    [2 points] Show that the following language is recognizable:
+    \[
+        \{ <M> |~M~\text{is a Turing machine that accepts the empty string}~\epsiloní»†\}.   
+    \]
+
+    Here <M> represents the encoding of M, as usual.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[7.]
+    [5 points] Give a convincing proof that the following language of equations over alphabet $\set{1, +, =}$ using 1-adic numerals is not decidable by any finite-state machine:
+    \[
+            L = \set{1^m+1^n=1^{m+n}~|~m > 0 âˆ§ n > 0}
+    \]
+    Here $1^m$ means a sequence of $m$ 1's. The first few strings in $L$ are:
+    \begin{align*}
+        &1+1=11 \\
+        &1+11=111 \\
+        &11+1=111 \\
+        &11+11=1111 \\
+        &11+111=11111 \\
+        &111+11=11111
+    \end{align*}
+    etc. (In this language, the $+$ symbol is used exactly once on the left-hand side
+    and not used at all on the right-hand side. The $=$ symbol is used once in each
+    string.)
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+\end{document}

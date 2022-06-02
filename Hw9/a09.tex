@@ -1,0 +1,151 @@
+\documentclass[12pt,letterpaper,boxed,cm]{hmcpset}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{cases}
+\usepackage{enumitem}
+\usepackage{wasysym}
+\usepackage{color}
+\usepackage{listings}
+
+\name{~}
+\class{Computer Science 81}
+\assignment{Homework 9}
+\duedate{4/4/17}
+
+\newcommand{\pn}[1]{\left( #1 \right)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\bk}[1]{\left[ #1 \right]}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\tb}[1]{\textbf{#1}}
+\newcommand{\mb}[1]{\mathbf{#1}}
+\renewcommand{\t}[1]{\text{#1}}
+
+\begin{document}
+\problemlist{1, 2, 3, 4}
+
+\begin{problem}[1.]
+    [10 points] A \tb{pairing function} is a function that maps any pair of natural numbers to a single natural number, such that the original numbers can be recovered from that number using separate recovery functions. Numerous pairing functions are known, but in this problem we will create a less known one, using techniques discussed above.
+
+    We'll use \tb{pair} as the name of our pairing function, and \tb{getx} and \tb{gety} as the recovery functions. So we want, for all natural numbers $x$ and $y$:
+    \begin{align*}
+        &\tb{getx}(\tb{pair}(x, y)) = x\\
+        &\tb{gety}(\tb{pair}(x, y)) = y
+    \end{align*}
+    The specific pairing function of interest is based on an arbitrary n-ary representation of numbers, where $n > 1$. We'll use $n = 2$ for sake of discussion. To compute \tb{pair}$(x, y)$, first express $x$ and $y$ in binary. For example, in computing $\tb{pair}(6, 9)$, the binary representations would be 0110 and 1001. Next \emph{interlace} those binary representations, starting with the least significant bits, so you don't have to worry about leading 0's. In this example, we would have 01 10 10 01 to show the interlacing phases as spaces, right-to-left. That is
+    \begin{align*}
+        &\textcolor{red}{0~~1~~1~~0}\\
+        &\underline{~~1~~0~~0~~1}~\t{interlace}\\
+        &\textcolor{red}{0}1~\textcolor{red}{1}0~\textcolor{red}{1}0~\textcolor{red}{0}1
+    \end{align*}
+
+    Then convert the interlaced representation, in this case 01101001, back to a number (105 decimal in this case), giving the value of the pairing function. Here is a table representing a few values of this function. The rows are $x$ and the columns are $y$.
+    \begin{center}
+        \begin{tabular}{| c | c | c | c | c | c | c |}
+            \hline
+            \tb{pair}$\mb{(x,y)}$ & \tb{0} & \tb{1} & \tb{2} & \tb{3} & \tb{4} & \tb{5} \\
+            \hline
+            \tb{0} & 0 & 1 & 4 & 5 & 16 & 17 \\
+            \hline
+            \tb{1} & 2 & 3 & 6 & 7 & 18 & 19 \\
+            \hline
+            \tb{2} & 8 & 9 & 12 & 13 & 24 & 25 \\
+            \hline
+            \tb{3} & 10 & 11 & 14 & 15 & 26 & 27 \\
+            \hline
+            \tb{4} & 32 & 33 & 36 & 37 & 48 & 49 \\
+            \hline
+            \tb{5} & 34 & 35 & 38 & 39 & 50 & 51 \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \begin{enumerate}[label=\alph*.]
+        \item {[5/10]} Present Python code for the function \tb{pair}.
+        \item {[5/10]} Present Python code for the companion recovery functions \tb{getx} and \tb{gety}.
+    \end{enumerate}
+    You may exploit the code given above as an example for encoding and decoding.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[2.]
+    [5 points extra credit] Do problem 1 using only numeric functions, no strings.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[3.]
+    [20 points] In the lecture, we indicated how a Turing machine can be simulated using first-order logic. In this problem, we want to show how to simulate a Turing machine using strictly numeric functions (no strings). A key aspect of this simulation is using numbers to simulate tapes. \\\\
+    Suppose there are $n$ tape symbols. Then we can encode any tape using $n$-ary encodings for the right and left parts of the tape. The left part of the tape will be encoded with the least-significant digit nearest the read/write head, so that the extension with blanks on the left appears as leading ``zeroes''. Similarly the right part of the tape will be encoded with the least-significant digit under the read/write, so that the extension with blanks on the right appears as leading ``zeroes''. In other words, when as a numeral, the right part would be in reverse, least-significant digit first.
+    \begin{enumerate}[label=\alph*.]
+        \item {[1/20]} Construct in Python the function \tb{first}(base, number) that returns the least-significant digit of number as a number. If the number argument is 0, then 0 should be returned. Example: \tb{first}$(3, 25) = 1$, since $25 = 221_3$.
+        \item {[1/20]} Construct in Python the function \tb{rest}(base, number) that returns the number represented by all but the least significant digit of number as a number. If the number argument is 0, then 0 should be returned. Example: \tb{rest}$(3, 25) = 8 (22_3)$.
+        \item {[1/20]} Construct in Python the function \tb{cons}(base, least, number) that returns the number represented by putting least as the least significant digit of a new number with number as the rest of the digits. Example: \tb{cons}$(3, 1, 8) = 25$.
+    \end{enumerate}
+    When defined as indicated above, the functions \tb{first}, \tb{rest}, and \tb{cons} automatically deal with the problem of extending the Turing machine tape with blanks as necessary, since blanks at the extremities of the tape and leading zeroes are the same thing.
+    \end{problem}
+
+    \begin{problem}[3. cont.]
+    The transition rules for the Turing machine will be given as a list of 5-tuples, with the states, tape symbols, and moves encoded as numbers. For example, the triangle function, which uses tape symbols {0, 1, 2} with 0 as blank, would be encoded as follows (with motion $1 = $left, $2 = $right, $3 = $none):
+    \begin{lstlisting}
+            # m(current-state, read, next-state, write, motion)
+    rules = [(1, 0, 0, 0, 3),
+             (1, 1, 2, 2, 2),
+
+             (2, 1, 2, 1, 2),
+             (2, 0, 3, 0, 2),
+
+             (3, 1, 3, 1, 2),
+             (3, 0, 4, 1, 1),
+
+             (4, 1, 4, 1, 1),
+             (4, 0, 5, 0, 1),
+
+             (5, 1, 5, 1, 1),
+             (5, 2, 6, 2, 2),
+             (5, 0, 0, 0, 3),
+
+             (6, 1, 2, 2, 2),
+             (6, 0, 7, 0, 1),
+
+             (7, 2, 7, 1, 1),
+             (7, 0, 8, 0, 2),
+
+             (8, 1, 1, 0, 2)
+            ]
+    \end{lstlisting}
+    Although we could further encode each 5-tuple as a single number, and even encode the
+    entire list as a single number, we will not require it here. 
+    \begin{enumerate}[label=\alph*.]
+        \setcounter{enumi}{3}
+        \item {[17/20]} Construct the Python function \tb{run(left, control, right, rules, base)} that simulates a Turing machine starting at the given state (left, control, right) using the indicated rules, with base as the number of tape symbols. The returned value should be the final state as a triple of the form (left, control, right), which occurs when there is no applicable rule.
+    \end{enumerate}
+    Use encodeString to encode the initial tape, and decodeNumber to show the result as a string. However, it is required that you use only numeric functions to carry out the simulation apart from tracing, except that you can use list functions to search the rule set for a given rule. These numeric functions should be defined in Python. You may use \tb{general recursion}, even though most functions, other than \tb{run} itself, will be primitive recursive. The function run could be coded as an iteration, and this would necessarily be an indefinite iteration. Have the run function return a pair of numbers representing the left and right tapes. Then you can display the contents using decodeNumber.\\
+    Test your run function on the rule set above, using this call:
+    \begin{lstlisting}
+    run(encodeString(3, ""), 1, encodeString(3, "111"), rules, 3)
+    \end{lstlisting}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[4.]
+    [5 points extra credit] Create a second version of the \tb{run} function above wherein the \tb{rules} argument of \tb{run} is a single number, by encoding the list of rules into that number, then inside \tb{run} decomposing the number using numeric functions. Here you would use a \tb{pairing function} as in problem 1 to encode the list. Use a \tb{modified} version of the pairing function in question 2 that does not map any pair to 0 (by adding 1 to the result of pairing and subtracting one before recovering). In this way, you can use 0 to indicate the encoding of the empty list.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+\end{document}

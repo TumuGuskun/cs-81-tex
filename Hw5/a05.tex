@@ -1,0 +1,190 @@
+\documentclass[12pt,letterpaper,boxed,cm]{hmcpset}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{cases}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{soul}
+
+\name{A GIRL HAS NO NAME}
+\class{Computer Science 81}
+\assignment{Homework 5}
+\duedate{2/21/17}
+
+\newcommand{\pn}[1]{\left( #1 \right)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\bk}[1]{\left[ #1 \right]}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\ra}[0]{\rightarrow}
+\newcommand{\cp}[0]{~\vdash~}
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\R}[0]{\mathbb{R}}
+
+
+\begin{document}
+\problemlist{1, 2, 3, 4, 5}
+All proofs must be typed. We don't want symbolic Hoare-Logic proofs, but rather readable proofs in “mathematical English” as one would use for a math class or the Algorithms class (or the background survey from the start of this semester). Try to be as clear as possible, use good grammar and complete sentences, and proofread your answers before you turn them in.\\
+
+\begin{problem}[1.] 
+    [19 points] Consider the following code for finding the maximum of a function $f$ on\\
+     inputs $0\ldots(N-1)$.
+    \begin{lstlisting}[mathescape]
+        $\set{ N \geq 1 }$
+
+        j=1
+        m = f(0)
+        while (j != N):
+            if m > f(j): 
+                j = j + 1
+            else:
+                m = f(j)
+                j = j + 1
+        $\displaystyle\{m=\max_{k\in0\ldots N-1} f(k)\}$
+    \end{lstlisting}
+    Your job is to convincingly argue it works as intended (terminates with the correct answer.)
+    \begin{enumerate}[label=\Alph*.]
+        \item {[5 points]} Propose a suitable loop invariant $I$ for this code.
+        \item {[9 points]} Justify your choice of $I$ by briefly explaining (using complete sentences):
+        \begin{enumerate}[label=\alph*.]
+            \item Why your invariant $I$ is true right before the while loop begins;
+            \item Why the loop body preserves the invariant (that is, why $I$ is true at the end of the loop body, when the ``if'' is done, assuming $I$ is true at the start of the loop body);
+            \item Why the invariant $I$ after the loop (plus the fact that the loop terminated) proves the desired postcondition.
+        \end{enumerate}
+        \item {[5 points]} Specify a loop variant that could be used to prove termination. (No justification is required.)
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[2.]
+    [35 points] The following code computes $a \bmod d$ (where $a \ge 0$ and $d > 0$) via repeated subtraction, and puts the final result in $r$. Instead of just repeatedly subtracting $d$, it tries to speed things up (e.g., when $a$ is much larger than $d$) by subtracting larger and larger multiples of $d$ where possible.
+    \begin{lstlisting}[mathescape]
+        $\set{ a \ge 0  \land  d > 0 }$
+
+        r = a
+        while (r >= d):
+            g = d
+            while (r >= g):
+                r = r - g
+                g = g + g
+
+
+        $\set{ r = (a \bmod d) }$
+    \end{lstlisting}
+
+    Your job is to convincingly argue that this code works as intended (terminates with the correct answer.) If you're not sure how/why it works, simulating the code by hand (on various inputs) is an excellent way to gather evidence and hypotheses for useful loop invariants.
+    \begin{enumerate}[label = \Alph*.]
+        \item {[10 points]} Propose a suitable invariant $I_1$ for the outer while loop.
+        \item {[10 points]} Propose a suitable invariant $I_2$ for the inner while loop. (Hint: it probably should mention $g$.)
+        \item {[10 points]} Briefly explain (using words and complete sentences)
+        \begin{enumerate}[label=\alph*.]
+            \item Why is your invariant $I_1$ is true right before the \ul{outer} loop begins;
+            \item Why is your invariant $I_2$ is true right before the \ul{inner} loop begins;
+            \item  Why does the code in the inner loop preserves the invariant $I_2$  (that is, why $I_2$ is still true at the end of the inner loop body);
+            \item Why does the invariant $I_2$ after the inner loop (plus the fact that the inner loop terminated) proves that $I_1$ still holds (i.e., that the outer loop preserves the invariant $I_1$);
+            \item Why does the invariant $I_1$ after the outer loop (plus the fact that the outer loop terminated) prove the desired postcondition.
+        \end{enumerate}
+        \item {[5 points]} Give variants for \ul{both} loops. (No justification is required.)
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[3.]
+    [35 points] Finally, here is some code that sets $z$ to be $a^b$, where $a$ and $b$ are nonnegative integers. For efficiency, it uses repeated squaring. (Recall that \% is the standard way of writing the ``modulo'' or ``remainder'' operator in code.)
+    \begin{lstlisting}[mathescape]
+        $\set{a>0\land b\ge 0}$
+        x = a
+        y = b
+        z = 1
+        while (y != 0):
+            while (y % 2 == 0):
+                x = x * x
+                y = y / 2
+            y = y - 1
+            z = z * x
+        $\set{z=a^b}$
+    \end{lstlisting}
+    Your job is to convincingly argue that this code works as intended (terminates with the correct answer.) If you're not sure how/why it works, simulating the code by hand (on various inputs) is an excellent way to gather evidence and hypotheses for useful loop invariants.
+    \begin{enumerate}[label=\Alph*.]
+        \item {[10 pionts]} Specify a suitable invariant $I_1$ for the outer while loop.
+        \item {[10 points]} Specify a suitable invariant $I_2$ for the inner while.
+        \item {[10 points]} Briefly explain (using words and complete sentences)
+        \begin{enumerate}[label=\alph*.]
+            \item Why is your invariant $I_1$ is true right before the \ul{outer} loop begins;
+            \item Why is your invariant $I_2$ is true right before the \ul{inner} loop begins;
+            \item  Why does the code in the inner loop preserves the invariant $I_2$  (that is, why $I_2$ is still true at the end of the inner loop body);
+            \item Why does the invariant $I_2$ after the inner loop (plus the fact that the inner loop terminated) prove that $I_1$ still holds (i.e., that the outer loop preserves the invariant $I_1$);
+            \item Why does the invariant $I_1$ after the outer loop (plus the fact that the outer loop terminated) prove the desired postcondition.
+        \end{enumerate}
+        \item {[5 points]} Give variants for \ul{both} loops. (No justification is required.)
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[4.]
+    [10 points] Indy and Invy have been learning about sorting algorithms in CS 140, and have been asked to prove that a particular sorting algorithm actually works. The pseudocode given to them is:
+    \begin{lstlisting}[escapechar=\%]
+        // %\emph{Precondition: We have an array $a[0\ldots(N-1)]$}%
+        for i in 0%$\ldots$%(N-1):
+              %$\ldots$%code for iteration i%$\ldots$%
+        // %\emph{Postcondition: The array $a[0\ldots(N-1)]$ is sorted}%
+    \end{lstlisting}
+    Let $P(m)$ mean that the first $m$ elements of array $a$ (namely $a[0\ldots(m-1)$] ) are correctly sorted.
+
+    Indy decides to do a correctness proof by induction, showing that after $k$ iterations of the loop (where $0 \le k \le N$), $P(k)$ holds. As usual for induction on numbers, he has to do two subproofs:
+    \begin{itemize}
+        \item the base case: $P(0)$ is true.
+        \item the inductive step: for any $k$ in the range $0\ldots(N-1)$, if $P(k)$ is true, then $P(k+1)$ is true.
+    \end{itemize}
+    Since the loop will execute $N$ times, he concludes that when the loop is done, $P(N)$ holds and the entire array $a[0\ldots(N-1)]$ is sorted.
+
+    Invy decides to do a proof using loop invariants. Although we haven't discussed loop invariants for for loops, she realizes that the same sorting algorithm can be written using a while loop:
+    \begin{lstlisting}[escapechar=\%]
+        // %\emph{Precondition: We have an array $a[0\ldots(N-1)]$}%
+        i = 0
+        while (i != N):
+              %$\ldots$%code for iteration i%$\ldots$%
+              i = i + 1
+        // %\emph{Postcondition: The array $a[0\ldots(N-1)]$ is sorted}%
+    \end{lstlisting}
+    Invy then proves correctness of this sorting algorithm by showing that $P(i)$ is a suitable loop invariant (i.e., it is a loop invariant, and this invariant makes the rest of the proof easy).
+    \begin{enumerate}[label=\Alph*.]
+        \item {[5 points]} Carefully explain why Indy and Invy ended up doing basically the same work, even though they used two different proof methods.
+        \item {[5 points]} For lots of algorithms, as here, you can either do proof-by-induction or proof-by-loop-invariant. When two different approaches give you the same results with equal amounts of work, you might as well use the approach you're more comfortable or  familiar with --- most folks choose induction. But in what sort of situations (or what sort of algorithms, or what sort of code) might loop-invariants make more sense than induction?
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[5.]
+    [1 easy point] Answer this quick survey when you're done:
+    \begin{enumerate}[label=\Alph*.]
+        \item How long (in hours) did you spend working on this assignment?
+        \item What was the most interesting thing you learned while answering these problems? (We’re sure there was \emph{something} you learned.)
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+\end{document}
+

@@ -1,0 +1,203 @@
+\documentclass[12pt,hidelinks,letterpaper,boxed,cm]{hmcpset}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{cases}
+\usepackage{enumitem}
+\usepackage{wasysym}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{bm}
+
+\name{A GIRL HAS NO NAME}
+\class{Computer Science 81}
+\assignment{Homework 8}
+\duedate{3/28/17}
+
+\newcommand{\pn}[1]{\left( #1 \right)}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\bk}[1]{\left[ #1 \right]}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\tb}[1]{\textbf{#1}}
+\renewcommand{\t}[1]{\text{#1}}
+
+\begin{document}
+\problemlist{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+
+\begin{problem}[1.]
+    [1 point] In the lecture slides, we showed how to define various primitive recursive predicates, such as \tb{lesseq} (less-than-or-equal) and propositional connectives.\\
+    Using the approach described in the slides, specifically explicit definition, show that the function unequal defined below is primitive recursive.
+    \[
+        \tb{unequal}(x, y) = 0' \t{ if } x \ne y \t{ otherwise } 0
+    \]
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[2.]
+    [1 point] Transcribe your definition above into Prover9, so that
+    \[
+        \tb{unequal}(x, y, z) \t{ gives } z = 0' \t{ if } x \ne y \t{ otherwise } 0
+    \]
+    \tb{For this, and all Prover9 problems, show the result of the tests found in the starter file} \href{https://docs.google.com/document/d/17TpS3azVV9630p24oeJrzMXScU_wvS9LOdKpn7Ox6nI/edit}{a08a.p9}. Examples of tests for unequal are:
+    \begin{lstlisting}
+        %-unequal(0''', 0''', z) #answer(z). % expect 0
+        %-unequal(0'', 0'''', z) #answer(z). % expect 0'
+        %-unequal(0'''', 0'', z) #answer(z). % expect 0'
+    \end{lstlisting}
+    These tests are commented out using \%. Run the tests one at a time by uncommenting that test, leaving the others commented. Having more than one test active will confuse Prover9 on which test is being run. Using a table as shown below, copy and paste the results of each of your tests into your submission. (You may include a reasonable number of additional tests. These are just the minimum required
+    \begin{center}
+        \begin{tabular}{| c | c |}
+            \hline
+            \tb{Test} & \tb{Last line of proof} \\
+            \hline
+            -unequal(0''', 0''', z) \#answer(z). \% expect 0 
+            & 138 \$F \# answer(0). \\ &
+            [ur(75,a,137,a),unit\_del(a,134)]. \\
+            \hline
+            -unequal(0'', 0'''', z) \#answer(z). \% expect 0'
+            & 183 \$F \# answer(0').\\ &
+            [ur(74,a,181,a),unit\_del(a,151)]. \\
+            \hline
+            -unequal(0'''', 0'', z) \#answer(z). \% expect 0'
+            & 182 \$F \# answer(0').\\ &
+            [ur(74,a,180,a),unit\_del(a,151)].\\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[3.]
+    [1 point] Define \tb{less} so that \tb{less}(x, y) means \tb{lesseq}(x, y) and \tb{unequal}(x, y).
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[4.]
+    [1 point] Transcribe your definition above into Prover9 and verify the tests in the same manner as in problem 2.\\\\
+    \tb{Note:} In some problems you may want to employ an auxiliary (“helper”) function.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[5.]
+    [3 points] Show that the function \tb{rem} (“remainder”) is primitive recursive:
+    $$\bm{rem}(x, y) = 0 \t{ if } y = 0$$
+    $$\bm{rem}(x, y) =\t{ the remainder of dividing natural number $x$ by natural number $y$ if }y \ne 0$$
+    The reason for having a value if $y = 0$ is so that the function is total, as required of every primitive recursive function. (Advice: Consider using $x$ as the induction variable, rather than $y$. Deal with the 0 exclusion separately.)
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[6.]
+    [3 points] Transcribe your definition of \tb{rem} into logic for Prover9. To make testing more readable, we provide in the starter file a conversion predicate code that converts decimal numerals from 0 to 20 into the unary numerals used in the theory. An example of using code in testing your \tb{rem} function is shown here:
+    \begin{lstlisting}
+test_rem(x,y,z)<-code(x,xc)&code(y,yc)&rem(xc,yc,zc)&code(z,zc).
+
+-test_rem(20, 7, z) #answer(z). % expect 6
+    \end{lstlisting}
+    The definitions of code look like this:
+    \begin{lstlisting}
+        code( 0, 0).
+        code( 1, 0').
+        code( 2, 0'').
+        code( 3, 0''').
+            . . .
+        code(20, 0'''''''''''''''''''').
+    \end{lstlisting}
+    These definitions can be used to encode, e.g. code(3, x) or decode, e.g. code(x, 0'''). They are not part of the primitive recursive formalism. They are just there for testing.
+    Verify the tests in the same manner as in problem 2.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[7.]
+    [3 points] Show that the function \tb{quot} (“quotient”) is primitive recursive:\\
+    $\bm{quot}(x, y) = 0$ if $y = 0$\\
+    $\bm{quot}(x, y) =$ the whole-number part of the quotient of dividing natural number $x$ by natural number $y$ if $y \ne 0$\\\\
+    The reason for having a value if y = 0 is the same as in problem 1.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[8.]
+    [3 points] Transcribe your definition of \tb{quot} into logic for Prover9 and verify the tests in the same manner as in problem 2.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[9.]
+    [6 points] Show that the 1-ary predicate \tb{is\_prime}, which returns 0' if its argument is prime and 0 otherwise, is primitive recursive. Here 0 and 1 are considered not prime. Any other number is prime iff it has no divisors other than 1 and the number itself.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[10.]
+    [5 points] Transcribe your definition of \tb{is\_prime} into logic for Prover9 and show the result of the tests found in the starter file.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[11.]
+    [3 points] The $i^{th}$ triangular number is defined by primitive recursion thus:
+        \begin{align*}
+            \tb{triangle}(0) = 0
+            \tb{triangle}(y') = y'+ \tb{triangle}(y)            
+        \end{align*}
+    Use the $\mu$ operator, as defined in the notes, to give a formal definition of the partial function that is the \emph{inverse} of the function \tb{triangle}. That is \tb{invtriangle}$(z) =$ the value of $y$ such that \tb{triangle}$(y) = z$. If there is no such $y$, then \tb{invtriangle}$(z)$ is undefined and can diverge. Show that your definition works in Prover9.
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\begin{problem}[12.]
+    [20 points] Design a Turing machine that produces the \tb{square} of the number on its tape. The input and the result are both encoded as a sequence of n contiguous 1’s. For example, if the input is 1111 then the result is 1111111111111111 $(4^2 = 16)$. Use the convention that the head is initially at the leftmost digit of the input. Thus if the input is empty, the head will be over a blank, and the result will also be empty (since 0 squared is 0).
+    \begin{enumerate}[label=\alph*.]
+        \item {[7 points]} Describe in prose how your machine works. 
+        \item {[8 points]}List all of the rules for your machine, in the Prover9 framework to be provided. Cut and paste your entire p9 file into your submission so that we can run it.
+        \item {[5 points]} Provide a trace of the machine running on the input 111, either from Prover9 or from Prolog. Paste in output from your simulation. (As an example, the output from the machine BB4 provided in the sample is given here. After preliminaries, starting at line 50 or so, the clauses in the proof are seen to mimic the states of the Turing machine, although the order may be slightly different due to choices Prover9 makes.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \vfill
+\end{solution}
+\newpage
+
+\end{document}
